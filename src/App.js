@@ -34,6 +34,7 @@ function App() {
     descripcion: ''
   })
 
+  //useEffect atento a cualquier cambio en las tareas y actualiza el localStorage
   useEffect(() => {
     localStorage.setItem('tareas', JSON.stringify(tareas));
   
@@ -65,13 +66,23 @@ function App() {
   }
 
   const handleDelete = (id) => {
-
+    //acción de borrar
     const borrarTarea = {
       type: 'borrar',
       payload: id
     }
 
     dispatch(borrarTarea);
+  }
+
+  const handleUpdate = (id) => {
+    //acción de actualizar tarea 
+    const tareaTerminada = {
+      type: 'tareaTerminada',
+      payload: id
+    }
+
+    dispatch(tareaTerminada);
   }
 
 
@@ -88,7 +99,7 @@ function App() {
               tareas.map( ({descripcion, terminada, id}, i) => (
                 //map i = indice, recorrido del map 0,1,2,3,4...
                 <li className='d-flex justify-content-between align-item-center' key={descripcion + i}>
-                  <p onClick={ () => handleTerminada(id)}>
+                  <p onClick={ () => handleUpdate(id)} className={terminada && 'text-decoration-line-through'}>
                     {i + 1}.{descripcion}
                   </p>
                   <button className='btn btn-sm btn-danger mb-1' onClick={ () => handleDelete(id)}>
