@@ -11,7 +11,7 @@ export const tareasReducer = (state = [], action) => {
         //ELIMINAR un elemento del array
             return state.filter(tarea => tarea.id !== action.payload)
         
-        case 'tareaTerminada' :
+        /* case 'tareaTerminada' :
 
             return state.map(tarea => {
                 if (tarea.id === action.payload) {
@@ -23,7 +23,19 @@ export const tareasReducer = (state = [], action) => {
                 } else {
                     return tarea
                 }
-            })
+            }) */
+
+        case 'tareaTerminada' :
+
+            return state.map(tarea =>
+
+                (tarea.id === action.payload)
+                ? {
+                    ...tarea,
+                    terminada: !tarea.terminada
+                }
+                : tarea
+            )
         
         default:
             return state;
