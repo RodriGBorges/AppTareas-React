@@ -7,8 +7,9 @@ const initialState = [
   ];
   
   const tareasReducer = (state = initialState, action) => {
-  
-    switch (action?.type) {
+    //action = agregar, eliminar, modificar
+    //si existe action (?) mostrame type 
+    switch (action?.type) { 
       case 'agregar':
   
         return [...state, action.payload];
@@ -35,3 +36,9 @@ const initialState = [
   tareas = tareasReducer(tareas, agregarTarea)
   
   console.log(tareas);
+/* 
+Una alternativa a useState. Acepta un reducer de tipo (state, action) => newState y devuelve 
+el estado actual emparejado con un método dispatch. (Si está familiarizado con Redux, ya sabe cómo funciona).
+
+https://es.reactjs.org/docs/hooks-reference.html#usereducer
+*/

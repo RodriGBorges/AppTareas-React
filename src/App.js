@@ -86,8 +86,9 @@ function App() {
           <ul className='list-group list-group-flush px-4'>
             {
               tareas.map( ({descripcion, terminada, id}, i) => (
+                //map i = indice, recorrido del map 0,1,2,3,4...
                 <li className='d-flex justify-content-between align-item-center' key={descripcion + i}>
-                  <p>
+                  <p onClick={ () => handleTerminada(id)}>
                     {i + 1}.{descripcion}
                   </p>
                   <button className='btn btn-sm btn-danger mb-1' onClick={ () => handleDelete(id)}>
