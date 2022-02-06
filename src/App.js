@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { tareasReducer } from './Reducers/tareasReducer';
-import { useForm } from './Hooks/useForm'
+import { AgregarTarea } from './Components/AgregarTarea';
 import './App.css';
 
 
@@ -30,9 +30,7 @@ function App() {
   const [tareas, dispatch] = useReducer(tareasReducer, [], init);
   /* console.log(tareas) */
 
-  const [{descripcion}, handleInputChange, reset ] = useForm({
-    descripcion: ''
-  })
+  
 
   //useEffect atento a cualquier cambio en las tareas y actualiza el localStorage
   useEffect(() => {
@@ -40,29 +38,15 @@ function App() {
   
   }, [tareas]);
   
+  // accion de agregar una nueva tarea
+  const handleAdd = (nuevaTarea) => {
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if(descripcion.trim().length < 1) {
-      return
-    }
-
-    let nuevaTarea = {
-      id: new Date().getTime(),
-      descripcion,
-      terminada: false
-    }
-  
     const agregarTarea = {
       type: 'agregar',
       payload: nuevaTarea
     }
-  
-    dispatch(agregarTarea);
 
-    reset()
-
+    dispatch(agregarTarea)
   }
 
   const handleDelete = (id) => {
@@ -111,10 +95,10 @@ function App() {
           </ul>
         </div>
         <div className='col-5'>
-          <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Aprender..." autoComplete="off" className="form-control" value={descripcion} name='descripcion'onChange={handleInputChange}/>
-            <button type='submit' className='btn btn-primary w-100 mt-2'>Agregar</button>
-          </form>
+          <AgregarTarea
+            handleAdd={handleAdd}
+            // se envia la accion de agregar nueva tarea por props
+          />
         </div>
 
       </div>
@@ -123,3 +107,9 @@ function App() {
 }
 
 export default App;
+
+/* 
+className={terminada && 'text-decoration-line-through'}
+if ternario reducido = &&
+si terminada está en true se pone lo siguiente como className 
+*/

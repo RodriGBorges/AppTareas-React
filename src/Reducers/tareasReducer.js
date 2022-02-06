@@ -23,6 +23,8 @@ export const tareasReducer = (state = [], action) => {
                 } else {
                     return tarea
                 }
+                else para que me devuelva las demas tareas que no matcheen con el if 
+                sino me devolveria solo 1 
             }) */
 
         case 'tareaTerminada' :
